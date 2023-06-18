@@ -1,15 +1,12 @@
-// server.js
 const express = require('express');
-const exampleRoutes = require('../src/routes/exampleRoutes');
-
 const app = express();
 
-// Other middleware and configurations
+app.get('/', (req, res) => {
+  res.send('Hello, World!');
+});
 
-app.use('/example', exampleRoutes);
+const port = 8080; // Choose a port number where your server will listen
 
-// Start the server
-const port = 9090;
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
 });
