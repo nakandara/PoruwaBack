@@ -1,6 +1,10 @@
 import { MongoClient } from 'mongodb';
+import dotenv from 'dotenv';
 
-const uri = 'mongodb+srv://pramodporuwa:pramod1997@cluster0.wv31aky.mongodb.net/';
+dotenv.config();
+
+
+const uri = process.env.MONGODG_URI_USERDB;
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 
 let database;
