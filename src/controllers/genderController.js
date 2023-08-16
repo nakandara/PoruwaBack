@@ -1,9 +1,14 @@
 import Gender from '../models/gender.js';
+import { getDatabase } from '../database/db.js';
 
 export const createGender = async (req, res) => {
   try {
-    const { name } = req.body;
-    const newGender = new Gender({ name });
+    const database = getDatabase();
+
+    const { name,userID} = req.body;
+    console.log(name);
+    
+    const newGender = new Gender({ name,userID });
     await newGender.save();
     res.status(200).json({ success: true, message: 'Gender created successfully' });
   } catch (error) {

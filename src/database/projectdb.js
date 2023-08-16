@@ -10,7 +10,7 @@ export const  connectToProjectDatabase = async() =>{
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
-    console.log('Connected to MongoDB Atlas');
+    console.log('Connected to MongoProjectDB Atlas');
   } catch (err) {
     console.error('Error connecting to MongoDB Atlas', err);
     process.exit(1);

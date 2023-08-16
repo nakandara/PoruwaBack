@@ -5,6 +5,7 @@ export const getExample = async (req, res) => {
     const database = getDatabase();
     const collection = database.collection('users');
     const result = await collection.find({}).toArray();
+    console.log(result);
     res.json(result);
   } catch (err) {
     console.error('Error performing database operation', err);

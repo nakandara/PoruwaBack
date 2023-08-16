@@ -12,7 +12,7 @@ let database;
 export async function connectToDatabase() {
   try {
     await client.connect();
-    console.log('Connected to MongoDB Atlas');
+    console.log('Connected to MongoUserDB Atlas');
     database = client.db('test');
   } catch (err) {
     console.error('Error connecting to MongoDB Atlas', err);

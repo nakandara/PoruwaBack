@@ -3,7 +3,7 @@ import { getExample, postExample } from '../controllers/exampleController.js';
 
 const router = express.Router();
 
-router.get('/', getExample);
+router.get('/users', getExample);
 router.post('/', postExample);
 
 export default router;
