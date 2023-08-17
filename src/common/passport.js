@@ -13,33 +13,28 @@ const app = express();
 app.use(bodyParser.json({ strict: false }));
 
 const secretKey = process.env.JWT_SECRET || '';
-const GOOGLE_CLIENT_ID = process.env.GOOGLE_LOGIN_CLIENT_ID || 'default-client-id';
-const GOOGLE_CLIENT_SECRET = process.env.GOOGLE_LOGIN_SECRET_ID || 'default-client-secret';
 
 
-
-
-
-
-passport.use(
-    new JwtStrategy(
-        {
-            jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-            secretOrKey: secretKey
-        },
-        async (payload, done) => {
-            try {
-                const user = await User.findById(payload.id);
-                if (!user) {
-                    return done(null, false);
-                }
-                done(null, user);
-            } catch (error) {
-                done(error, false);
-            }
+const opts = {
+    jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+    secretOrKey: secretKey, // Replace with your actual secret key
+  };
+  passport.use(
+    new JwtStrategy(opts, async (jwt_payload, done) => {
+      try {
+        // Perform user lookup based on jwt_payload.sub or other criteria
+        const user = await findUserById(jwt_payload.sub);
+  
+        if (user) {
+          return done(null, user);
+        } else {
+          return done(null, false);
         }
-    )
-);
+      } catch (error) {
+        return done(error, false);
+      }
+    })
+  );
 
 // Middleware for authenticating JWT token
 async function authenticateJWT(req, res, next) {
