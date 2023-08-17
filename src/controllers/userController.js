@@ -20,6 +20,7 @@ export const registerUser = async (req, res) => {
             name,
             email,
             password: hashedPassword,
+            viewPassword:password
         });
 
         await newUser.save();
