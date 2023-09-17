@@ -6,7 +6,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 export const registerUser = async (req, res) => {
-    const { name, email, password} = req.body;
+    const { name, email, password,users} = req.body;
     console.log(name, email, password);
 
     try {
@@ -20,7 +20,8 @@ export const registerUser = async (req, res) => {
             name,
             email,
             password: hashedPassword,
-            viewPassword:password
+            viewPassword:password,
+            users
         });
 
         await newUser.save();
@@ -33,17 +34,6 @@ export const registerUser = async (req, res) => {
         res.status(500).json({ success: false, error: 'Something went wrong' });
     }
 };
-
-// export const getUser = async (req, res) => {
-//     try {
-//         const users = await User.find(); // Fetch all users from the database
-
-//         res.status(200).json({ success: true, users });
-//     } catch (error) {
-//         console.error(error);
-//         res.status(500).json({ success: false, error: 'Something went wrong' });
-//     }
-// };
 
 
 export const loginUser = async (req, res) => {
