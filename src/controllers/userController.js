@@ -6,33 +6,10 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 export const registerUser = async (req, res) => {
-    const { name, email, password,users} = req.body;
+    const { name, email, password} = req.body;
     console.log(name, email, password);
 
-    try {
-        const hashedPassword = await bcrypt.hash(password, 10);
-        const existingUser = await User.findOne({ email });
-        if (existingUser) {
-            return res.status(500).json({ success: false, error: 'existing User' });
-        }
-        const newUser = new User({
-            
-            name,
-            email,
-            password: hashedPassword,
-            viewPassword:password,
-            users
-        });
 
-        await newUser.save();
-
-        const token = jwt.sign({ userId: newUser?._id }, process.env.JWT_SECRET || '');
-
-        res.status(200).json({ success: true, token, newUser ,password});
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ success: false, error: 'Something went wrong' });
-    }
 };
 
 
