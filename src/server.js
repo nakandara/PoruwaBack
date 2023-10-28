@@ -1,4 +1,5 @@
 import express from 'express';
+import path from 'path';
 import exampleRoutes from './routes/exampleRoutes.js';
 import genderRoutes from './routes/genderRoutes.js'
 import newsRoutes from './routes/newsRoutes.js'
@@ -22,9 +23,11 @@ const googleOAuth2Client = new OAuth2Client(googleClientId, googleClientSecret, 
 
 
 const app = express();
-app.use('/uploads', express.static('uploads'));
-const port = 8080;
 app.use(cors());
+
+app.use('/uploads', express.static('uploads'));
+
+const port = 8080;
 
 app.use(
   session({
