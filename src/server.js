@@ -6,6 +6,7 @@ import newsRoutes from './routes/newsRoutes.js'
 import UserRoutes from './routes/userRoutes.js'
 import profilePhotoRoutes from './routes/profilePhotoRoutes.js'
 import profileRoutes from './routes/profileRoutes.js'
+import postRoutes from './routes/postRoutes.js'
 import {connectToDatabase} from './database/db.js'
 import {connectToProjectDatabase} from './database/projectdb.js'
 import session from 'express-session';
@@ -68,6 +69,7 @@ app.use('/api', newsRoutes)
 app.use('/api', UserRoutes);
 app.use('/api', profileRoutes);
 app.use('/api', profilePhotoRoutes);
+app.use('/api', postRoutes);
 
 app.get('/', (req, res) => {
   res.send('Hello, World!');
